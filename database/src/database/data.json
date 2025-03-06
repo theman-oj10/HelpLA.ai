@@ -1,0 +1,152 @@
+[
+    {
+        "name": "Return to your home safely",
+        "description": "Learn how to return to your home safely after the wildfires",
+        "link": "https://www.ca.gov/lafires/return-to-your-home-safely/"
+    },
+    {
+        "name": "Insurance Protection",
+        "description": "California protects you from losing your home insurance. State law prevents insurance companies from canceling or not renewing home insurance policies for one year in areas near a wildfire",
+        "link": "https://www.insurance.ca.gov/01-consumers/140-catastrophes/MandatoryOneYearMoratoriumNonRenewals.cfm"
+    },
+    {
+        "name": "Insurance Claim Help",
+        "description": "California Department of Insurance (CDI) gives help in many languages including resources for wildfire victims and claims tips",
+        "link": "https://www.insurance.ca.gov/01-consumers/101-help/"
+    },
+    {
+        "name": "Licensed Contractor Search",
+        "description": "Find a licensed contractor to protect yourself from unlicensed contractors who often prey on disaster survivors",
+        "link": "https://www.cslb.ca.gov/OnlineServices/CheckLicenseII/ZipCodeSearch.aspx"
+    },
+    {
+        "name": "License Verification",
+        "description": "Verify a professional license status such as current, expired, suspended, or revoked",
+        "link": "https://search.dca.ca.gov/"
+    },
+    {
+        "name": "Building Permits",
+        "description": "Get a building permit online or at your local building and safety office before starting to rebuild",
+        "link": "https://pw.lacounty.gov/permits/epicla/default.aspx"
+    },
+    {
+        "name": "Rebuilding Guidance",
+        "description": "Get an overview of what it will take to rebuild your home with important deadlines coming in March",
+        "link": "https://www.ca.gov/lafires/docs/rebuilding-guidance.pdf"
+    },
+    {
+        "name": "Unemployment Assistance",
+        "description": "Apply for unemployment if you lost your job due to the fire",
+        "link": "https://edd.ca.gov/en/unemployment/disaster_unemployment_assistance"
+    },
+    {
+        "name": "Disability Insurance",
+        "description": "Apply for disability if you are sick or hurt due to the fires",
+        "link": "https://edd.ca.gov/en/disability/disability_insurance/"
+    },
+    {
+        "name": "Paid Family Leave",
+        "description": "Apply for Paid Family Leave if you need time off to care for your family and can't work",
+        "link": "https://edd.ca.gov/en/disability/paid-family-leave/"
+    },
+    {
+        "name": "CalJOBS",
+        "description": "Apply for a new job on California's online job exchange system",
+        "link": "https://www.caljobs.ca.gov/vosnet/default.aspx"
+    },
+    {
+        "name": "Jobs and Training",
+        "description": "Get general support, referrals, and training to find a new job in California",
+        "link": "https://edd.ca.gov/en/jobs/"
+    },
+    {
+        "name": "Fire Cleanup Worker Safety",
+        "description": "Learn how to keep yourself safe while working on fire cleanup",
+        "link": "https://www.labor.ca.gov/2025/02/06/know-your-rights-keep-yourself-safe-working-on-fire-cleanup/"
+    },
+    {
+        "name": "Income Tax Relief",
+        "description": "People in Los Angeles County affected by the fires may postpone filing and paying taxes until October 15, 2025",
+        "link": "https://www.ftb.ca.gov/file/when-to-file/los-angeles-county-fires.html"
+    },
+    {
+        "name": "Property Tax Relief",
+        "description": "Apply for property tax reassessment with extended deadlines until April 2026 for people affected by the LA fires",
+        "link": "https://assessor.lacounty.gov/tax-relief/disaster-relief"
+    },
+    {
+        "name": "Return to your home safely",
+        "description": "Learn how to return to your home safely after the wildfires",
+        "link": "https://www.ca.gov/lafires/return-to-your-home-safely/"
+    },
+    {
+        "name": "Insurance Protection",
+        "description": "California protects you from losing your home insurance. State law prevents insurance companies from canceling or not renewing home insurance policies for one year in areas near a wildfire",
+        "link": "https://www.insurance.ca.gov/01-consumers/140-catastrophes/MandatoryOneYearMoratoriumNonRenewals.cfm"
+    },
+    {
+        "name": "Insurance Claim Help",
+        "description": "California Department of Insurance (CDI) gives help in many languages including resources for wildfire victims and claims tips",
+        "link": "https://www.insurance.ca.gov/01-consumers/101-help/"
+    },
+    {
+        "name": "Licensed Contractor Search",
+        "description": "Find a licensed contractor to protect yourself from unlicensed contractors who often prey on disaster survivors",
+        "link": "https://www.cslb.ca.gov/OnlineServices/CheckLicenseII/ZipCodeSearch.aspx"
+    },
+    {
+        "name": "License Verification",
+        "description": "Verify a professional license status such as current, expired, suspended, or revoked",
+        "link": "https://search.dca.ca.gov/"
+    },
+    {
+        "name": "Building Permits",
+        "description": "Get a building permit online or at your local building and safety office before starting to rebuild",
+        "link": "https://pw.lacounty.gov/permits/epicla/default.aspx"
+    },
+    {
+        "name": "Rebuilding Guidance",
+        "description": "Get an overview of what it will take to rebuild your home with important deadlines coming in March",
+        "link": "https://www.ca.gov/lafires/docs/rebuilding-guidance.pdf"
+    },
+    {
+        "name": "Unemployment Assistance",
+        "description": "Apply for unemployment if you lost your job due to the fire",
+        "link": "https://edd.ca.gov/en/unemployment/disaster_unemployment_assistance"
+    },
+    {
+        "name": "Disability Insurance",
+        "description": "Apply for disability if you are sick or hurt due to the fires",
+        "link": "https://edd.ca.gov/en/disability/disability_insurance/"
+    },
+    {
+        "name": "Paid Family Leave",
+        "description": "Apply for Paid Family Leave if you need time off to care for your family and can't work",
+        "link": "https://edd.ca.gov/en/disability/paid-family-leave/"
+    },
+    {
+        "name": "CalJOBS",
+        "description": "Apply for a new job on California's online job exchange system",
+        "link": "https://www.caljobs.ca.gov/vosnet/default.aspx"
+    },
+    {
+        "name": "Jobs and Training",
+        "description": "Get general support, referrals, and training to find a new job in California",
+        "link": "https://edd.ca.gov/en/jobs/"
+    },
+    {
+        "name": "Fire Cleanup Worker Safety",
+        "description": "Learn how to keep yourself safe while working on fire cleanup",
+        "link": "https://www.labor.ca.gov/2025/02/06/know-your-rights-keep-yourself-safe-working-on-fire-cleanup/"
+    },
+    {
+        "name": "Income Tax Relief",
+        "description": "People in Los Angeles County affected by the fires may postpone filing and paying taxes until October 15, 2025",
+        "link": "https://www.ftb.ca.gov/file/when-to-file/los-angeles-county-fires.html"
+    },
+    {
+        "name": "Property Tax Relief",
+        "description": "Apply for property tax reassessment with extended deadlines until April 2026 for people affected by the LA fires",
+        "link": "https://assessor.lacounty.gov/tax-relief/disaster-relief"
+    }
+]
