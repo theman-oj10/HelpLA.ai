@@ -10,3 +10,61 @@
 #   universal: false
 
 -e file:.
+annotated-types==0.7.0
+    # via pydantic
+anyio==4.8.0
+    # via httpx
+authlib==1.3.1
+    # via weaviate-client
+certifi==2025.1.31
+    # via httpcore
+    # via httpx
+cffi==1.17.1
+    # via cryptography
+cryptography==44.0.2
+    # via authlib
+dotenv==0.9.9
+    # via database
+grpcio==1.70.0
+    # via grpcio-health-checking
+    # via grpcio-tools
+    # via weaviate-client
+grpcio-health-checking==1.70.0
+    # via weaviate-client
+grpcio-tools==1.70.0
+    # via weaviate-client
+h11==0.14.0
+    # via httpcore
+httpcore==1.0.7
+    # via httpx
+httpx==0.28.1
+    # via weaviate-client
+idna==3.10
+    # via anyio
+    # via httpx
+loadenv==0.1.1
+    # via database
+protobuf==5.29.3
+    # via grpcio-health-checking
+    # via grpcio-tools
+pycparser==2.22
+    # via cffi
+pydantic==2.10.6
+    # via weaviate-client
+pydantic-core==2.27.2
+    # via pydantic
+python-dotenv==1.0.1
+    # via dotenv
+setuptools==75.8.2
+    # via grpcio-tools
+sniffio==1.3.1
+    # via anyio
+typing-extensions==4.12.2
+    # via pydantic
+    # via pydantic-core
+validators==0.34.0
+    # via weaviate-client
+weaviate==0.1.2
+    # via database
+weaviate-client==4.11.1
+    # via database

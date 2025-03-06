@@ -5,7 +5,12 @@ description = "Add your description here"
 authors = [
     { name = "Olivier D'Ancona", email = "olivier.dancona@master.hes-so.ch" }
 ]
-dependencies = []
+dependencies = [
+    "weaviate>=0.1.2",
+    "loadenv>=0.1.1",
+    "dotenv>=0.9.9",
+    "weaviate-client>=4.11.1",
+]
 readme = "README.md"
 requires-python = ">= 3.8"
 
