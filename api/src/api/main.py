@@ -1,12 +1,12 @@
 import os
-import json
 import weaviate
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from weaviate.classes.init import Auth
-from weaviate.classes.config import Configure
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
+from langchain.prompts import PromptTemplate
+from langchain.schema import OutputParser
 
 # Load environment variables
 load_dotenv()
@@ -29,11 +29,25 @@ client = weaviate.connect_to_weaviate_cloud(
 )
 
 # Initialize OpenAI client
-openai_client = ChatOpenAI(api_key=OPENAI_API_KEY)
+llm = ChatOpenAI(model="gpt-4o", api_key=OPENAI_API_KEY)
 
 # Define request model
 class QueryRequest(BaseModel):
     user_query: str
+
+# Define a structured output model
+class RefinedQueryResponse(OutputParser):
+    refined_query: str
+
+# Define prompt template
+prompt_refine_query = PromptTemplate(
+    input_variables=["user_query"],
+    template="""
+    You are an AI that refines search queries for a service database.
+    Given the user query: "{user_query}", provide a refined search query.
+    Only return a JSON object with the key "refined_query".
+    """
+)
 
 @app.get("/")
 def root():
@@ -46,15 +60,12 @@ def query_services(request: QueryRequest):
     """
     try:
         user_query = request.user_query
-        
+
         # Step 1: Use OpenAI to refine the search query
-        chat_response = openai_client.chat.completions.create(
-            model="gpt-4",
-            messages=[{"role": "system", "content": "You are an AI that refines search queries for a service database."},
-                      {"role": "user", "content": f"Find relevant services for: {user_query}"}]
-        )
-        
-        refined_query = chat_response.choices[0].message.content
+        chain_refine = prompt_refine_query | llm.with_structured_output(RefinedQueryResponse)
+        refined_response = chain_refine.invoke({"user_query": user_query})
+        refined_query = refined_response.refined_query
+
         print(f"Refined query: {refined_query}")
 
         # Step 2: Query Weaviate for relevant services
@@ -67,10 +78,11 @@ def query_services(request: QueryRequest):
         if not response.objects:
             return {"message": "No relevant services found."}
 
-        services = [{"name": obj.properties.get("name"), 
-                     "description": obj.properties.get("description"), 
-                     "link": obj.properties.get("link")} 
-                    for obj in response.objects]
+        services = [{
+            "name": obj.properties.get("name"),
+            "description": obj.properties.get("description"),
+            "link": obj.properties.get("link")
+        } for obj in response.objects]
 
         return {"query": user_query, "refined_query": refined_query, "services": services}
 
