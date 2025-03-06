@@ -6,7 +6,6 @@ from weaviate.classes.init import Auth
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
-from langchain.schema import OutputParser
 
 # Load environment variables
 load_dotenv()
@@ -15,6 +14,10 @@ load_dotenv()
 WEAVIATE_URL = os.getenv("WEAVIATE_URL")
 WEAVIATE_API_KEY = os.getenv("WEAVIATE_API_KEY")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+print(f"WEAVIATE_URL: {WEAVIATE_URL}")
+print(f"WEAVIATE_API_KEY: {WEAVIATE_API_KEY}")
+print(f"OPENAI_API_KEY: {OPENAI_API_KEY}")
 
 # FastAPI app
 app = FastAPI()
@@ -31,13 +34,6 @@ client = weaviate.connect_to_weaviate_cloud(
 # Initialize OpenAI client
 llm = ChatOpenAI(model="gpt-4o", api_key=OPENAI_API_KEY)
 
-# Define request model
-class QueryRequest(BaseModel):
-    user_query: str
-
-# Define a structured output model
-class RefinedQueryResponse(OutputParser):
-    refined_query: str
 
 # Define prompt template
 prompt_refine_query = PromptTemplate(
