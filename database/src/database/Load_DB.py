@@ -45,26 +45,29 @@ def main():
     try:
         with open("/home/olivier/projet/github-hackaton/database/src/database/data.json", "r", encoding="utf-8") as file:
             data = json.load(file)
-            print("Data loaded successfully!", data)
+            print("Data loaded successfully!")
+
+        # Populate Weaviate with data
+        with services.batch.dynamic() as batch:
+            for d in data:
+                print(f"Adding object: {d.get('name')}")
+                batch.add_object({
+                    "name": d.get("name"),
+                    "description": d.get("description"),
+                    "link": d.get("link"),
+                })
+
+        response = services.query.near_text(
+            query="Fire",
+            limit=2
+        )
+        client.close()
+
     except (FileNotFoundError, json.JSONDecodeError) as e:
         print(f"Error reading data.json: {e}")
         client.close()
         return
     
-    # Populate Weaviate with data
-    with services.batch.dynamic() as batch:
-        for d in data:
-            batch.add_object({
-                "name": d.get("name"),
-                "description": d.get("description"),
-                "link": d.get("link"),
-            })
-
-    response = services.query.near_text(
-        query="Fire",
-        limit=2
-    )
-
     client.close()
 
 if __name__ == "__main__":
