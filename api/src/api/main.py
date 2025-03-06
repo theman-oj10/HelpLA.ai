@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from weaviate.classes.init import Auth
 from weaviate.classes.config import Configure
 from dotenv import load_dotenv
-from openai import OpenAI
+from langchain_openai import ChatOpenAI
 
 # Load environment variables
 load_dotenv()
@@ -29,7 +29,7 @@ client = weaviate.connect_to_weaviate_cloud(
 )
 
 # Initialize OpenAI client
-openai_client = OpenAI(api_key=OPENAI_API_KEY)
+openai_client = ChatOpenAI(api_key=OPENAI_API_KEY)
 
 # Define request model
 class QueryRequest(BaseModel):
