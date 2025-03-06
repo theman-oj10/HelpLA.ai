@@ -103,6 +103,8 @@ def query_services(request):
         # Step 3: Organize services in a user-friendly format
         chain_organize = prompt_organize_services | llm
         organized_response = chain_organize.invoke({"services": [s.dict() for s in services]})
+        print(f"Organized response: {organized_response}")
+        print(f"Services")
 
         return {"query": user_query, "refined_query": refined_query, "response": organized_response}
 
