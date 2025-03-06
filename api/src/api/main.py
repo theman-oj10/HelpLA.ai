@@ -50,7 +50,7 @@ def root():
     return {"message": "FastAPI is running!"}
 
 @app.post("/query_services")
-def query_services(request: QueryRequest):
+def query_services(request):
     """
     Query Weaviate for relevant services based on user input
     """
@@ -58,7 +58,7 @@ def query_services(request: QueryRequest):
         user_query = request.user_query
 
         # Step 1: Use OpenAI to refine the search query
-        chain_refine = prompt_refine_query | llm.with_structured_output(RefinedQueryResponse)
+        chain_refine = prompt_refine_query | llm
         refined_response = chain_refine.invoke({"user_query": user_query})
         refined_query = refined_response.refined_query
 
