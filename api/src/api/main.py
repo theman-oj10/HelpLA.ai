@@ -6,6 +6,7 @@ from weaviate.classes.init import Auth
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
+from pydantic import BaseModel, Field
 
 # Load environment variables
 load_dotenv()
@@ -18,6 +19,14 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 print(f"WEAVIATE_URL: {WEAVIATE_URL}")
 print(f"WEAVIATE_API_KEY: {WEAVIATE_API_KEY}")
 print(f"OPENAI_API_KEY: {OPENAI_API_KEY}")
+
+class Service(BaseModel):
+    """Service for help"""
+
+    name: str = Field(..., description="Name of the service")
+    description: str = Field(..., description="Description of the service")
+    link: str = Field(..., description="Link to URL")
+
 
 # FastAPI app
 app = FastAPI()
@@ -34,14 +43,25 @@ client = weaviate.connect_to_weaviate_cloud(
 # Initialize OpenAI client
 llm = ChatOpenAI(model="gpt-4o", api_key=OPENAI_API_KEY)
 
-
-# Define prompt template
+# Define prompt templates
 prompt_refine_query = PromptTemplate(
     input_variables=["user_query"],
     template="""
     You are an AI that refines search queries for a service database.
     Given the user query: "{user_query}", provide a refined search query.
-    Only return a JSON object with the key "refined_query".
+    Explain what services you found and present them to the user with a link.
+    """
+)
+
+prompt_organize_services = PromptTemplate(
+    input_variables=["services"],
+    template="""
+    You are an AI that organizes service information in a user-friendly format.
+    
+    Given the following list of services:
+    {services}
+
+    Format them in a clear and structured way that is easy for the user to read.
     """
 )
 
@@ -74,13 +94,17 @@ def query_services(request):
         if not response.objects:
             return {"message": "No relevant services found."}
 
-        services = [{
-            "name": obj.properties.get("name"),
-            "description": obj.properties.get("description"),
-            "link": obj.properties.get("link")
-        } for obj in response.objects]
+        services = [Service(
+            name=obj.properties.get("name"),
+            description=obj.properties.get("description"),
+            link=obj.properties.get("link")
+        ) for obj in response.objects]
 
-        return {"query": user_query, "refined_query": refined_query, "services": services}
+        # Step 3: Organize services in a user-friendly format
+        chain_organize = prompt_organize_services | llm
+        organized_response = chain_organize.invoke({"services": [s.dict() for s in services]})
+
+        return {"query": user_query, "refined_query": refined_query, "response": organized_response}
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
