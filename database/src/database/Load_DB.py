@@ -39,6 +39,7 @@ def main():
             generative_config=Configure.Generative.cohere()             # Configure the Cohere generative AI integration
         )
 
+    services = client.collections.get("Services")
 
     # Populate
     print("Trying to load data.json...")
