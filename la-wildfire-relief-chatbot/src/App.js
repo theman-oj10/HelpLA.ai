@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import MerlinTextInput from './MerlinTextInput';
 
 const MerlinApp = () => {
   const [messages, setMessages] = useState([]);
@@ -10,15 +9,14 @@ const MerlinApp = () => {
       // Add user message to the chat
       setMessages([...messages, { text: message, isUser: true }]);
       
-      // This is where you would call your RAG-based chatbot API
+      // Process the user message through the API
       processUserMessage(message);
     }
   };
   
-  // This function processes user messages and generates responses
-  // Modify this function to integrate with your actual backend
+  // This function processes user messages and generates responses via the API
   const processUserMessage = async (message) => {
-    // Show loading state (optional)
+    // Show loading state
     setMessages(prev => [...prev, { 
       text: "Thinking...", 
       isUser: false,
@@ -26,29 +24,19 @@ const MerlinApp = () => {
     }]);
     
     try {
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Make API call to the FastAPI backend
+      const response = await fetch('http://localhost:8000/query_services', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_query: message }) // Match the expected field name in backend
+      });
       
-      // Replace this with your actual API call to your RAG system
-      // const response = await fetch('your-api-endpoint', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ query: message })
-      // });
-      // const data = await response.json();
-      // const aiResponse = data.response;
-      
-      // For now, simulate different responses based on message content
-      let aiResponse = "";
-      if (message.toLowerCase().includes("help")) {
-        aiResponse = "I can help you with various recovery resources. What specific assistance do you need?";
-      } else if (message.toLowerCase().includes("insurance")) {
-        aiResponse = "For insurance claims, you'll need to contact your provider and document all damages. Would you like information on expedited claim processes?";
-      } else if (message.toLowerCase().includes("housing")) {
-        aiResponse = "There are several temporary housing options available, including FEMA assistance programs and local shelter resources.";
-      } else {
-        aiResponse = `Based on your query about "${message}", I found several resources that might help with your recovery efforts.`;
+      if (!response.ok) {
+        throw new Error(`API responded with status: ${response.status}`);
       }
+      
+      const data = await response.json();
+      const aiResponse = data.formatted_response; // Use the field from ServiceResponse model
       
       // Remove loading message and add the actual response
       setMessages(prev => {
@@ -59,11 +47,12 @@ const MerlinApp = () => {
         }];
       });
     } catch (error) {
+      console.error("API Error:", error);
       // Handle errors
       setMessages(prev => {
         const filteredMessages = prev.filter(msg => !msg.isLoading);
         return [...filteredMessages, { 
-          text: "Sorry, I encountered an error processing your request. Please try again.", 
+          text: "Sorry, I encountered an error connecting to the service. Please try again.", 
           isUser: false,
           isError: true
         }];
